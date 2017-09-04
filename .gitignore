@@ -1,0 +1,9 @@
+# Dashboardia-specific Ignores
+*_dev
+*_ignored
+
+# IDE
+.idea
+
+# OSX
+.DS_Store
