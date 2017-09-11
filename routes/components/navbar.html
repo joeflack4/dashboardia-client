@@ -1,0 +1,38 @@
+{% block navbar -%}
+
+  <ul class="nav">
+
+          <li class="active">
+            <a href="{{ url_for('client.home') }}">
+              <i class="material-icons">dashboard</i>
+              <p>Home</p>
+            </a>
+          </li>
+
+          {% for _, section in store.sections.items() %}
+            <li>
+              <a data-toggle="collapse" href="#{{ section.name }}" class="collapsed" aria-expanded="false">
+                <i class="material-icons">{{ section.icon }}</i>
+                <p>{{ section.label }}<b class="caret"></b></p>
+              </a>
+              <div class="collapse" id="{{ section.name }}" aria-expanded="false" style="height: 0;">
+                <ul class="nav">
+                {% for dashboard in section.children_dashboards %}
+                  <li><a href="{{ url_for('client.'+section.name+'__'+dashboard.name) }}">
+                    {{ dashboard.label }}
+                  </a></li>
+                {% endfor %}
+                  <li><a href="{{ url_for('client.'+section.name+'__'+'add') }}">
+                    Add
+                  </a></li>
+                  <li><a href="{{ url_for('client.'+section.name+'__'+'settings') }}">
+                    Settings
+                  </a></li>
+                </ul>
+              </div>
+            </li>
+          {% endfor %}
+
+        </ul>
+
+{%- endblock navbar %}
